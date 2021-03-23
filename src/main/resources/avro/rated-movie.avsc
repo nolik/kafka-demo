@@ -1,0 +1,11 @@
+{
+  "namespace": "com.godeltech.com.kafkademo.avro",
+  "type": "record",
+  "name": "RatedMovie",
+  "fields": [
+    {"name": "id", "type": "long"},
+    {"name": "title", "type": "string"},
+    {"name": "release_year", "type": "int"},
+    {"name": "rating", "type": "double"}
+  ]
+}
