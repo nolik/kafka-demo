@@ -1,9 +1,9 @@
 package com.godeltech.com.kafkademo.configuration;
 
-import com.godeltech.com.kafkademo.MovieRatingJoiner;
 import com.godeltech.com.kafkademo.avro.Movie;
 import com.godeltech.com.kafkademo.avro.RatedMovie;
 import com.godeltech.com.kafkademo.avro.Rating;
+import com.godeltech.com.kafkademo.service.MovieRatingJoiner;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -22,13 +22,12 @@ public class TopologyConfiguration {
 
 	@Bean
 	public Topology buildTopology(KafkaConfiguration kafkaConfiguration,
-		SpecificAvroSerde<RatedMovie> ratedMovieAvroSerde) {
+		SpecificAvroSerde<RatedMovie> ratedMovieAvroSerde, MovieRatingJoiner joiner) {
 		val streamsBuilder = new StreamsBuilder();
 		val movieTopic = kafkaConfiguration.getMovieInputTopic();
 		val rekeyedMovieTopic = "rekeyed-movies";
 		val ratingTopic = kafkaConfiguration.getRatingInputTopic();
 		val ratedMoviesTopic = kafkaConfiguration.getOutputTopic();
-		val joiner = new MovieRatingJoiner();
 
 		val movieStream = streamsBuilder.<String, Movie>stream(movieTopic)
 			.map((key, movie) -> new KeyValue<>(String.valueOf(movie.getId()), movie));

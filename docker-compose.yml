@@ -71,8 +71,9 @@ services:
       CONNECT_CONFIG_STORAGE_TOPIC: _kafka-connect-01-configs
       CONNECT_OFFSET_STORAGE_TOPIC: _kafka-connect-01-offsets
       CONNECT_STATUS_STORAGE_TOPIC: _kafka-connect-01-status
-      CONNECT_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
-      CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
+      CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
       CONNECT_PLUGIN_PATH: '/usr/share/java,/usr/share/confluent-hub-components'
     command: /bin/bash -x create-connectors.sh
 
@@ -171,16 +172,16 @@ services:
         echo -e "\t" $$(date) " Kibana saved objects request response: " $$(curl -H 'kbn-xsrf: true' -o /dev/null -w %{http_code} -s http://localhost:5601/api/saved_objects/_find?type=index-pattern&search_fields=title&search=*) $$(curl -H 'kbn-xsrf: true' -s http://localhost:5601/api/saved_objects/_find?type=index-pattern&search_fields=title&search=*)
 
         echo -e "\n--\n+> Pre-creating index pattern"
-        curl -s -XPOST 'http://localhost:5601/api/saved_objects/index-pattern/demo' \
+        curl -s -XPOST 'http://localhost:5601/api/saved_objects/index-pattern/rated-movies' \
           -H 'kbn-xsrf: nevergonnagiveyouup' \
           -H 'Content-Type: application/json' \
-          -d '{"attributes":{"title":"demo","timeFieldName":"relese_year"}}'
+          -d '{"attributes":{"title":"rated-movies","timeFieldName":"relese_year"}}'
 
         echo -e "\n--\n+> Setting the index pattern as default"
         curl -s -XPOST 'http://localhost:5601/api/kibana/settings' \
           -H 'kbn-xsrf: nevergonnagiveyouup' \
           -H 'content-type: application/json' \
-          -d '{"changes":{"defaultIndex":"demo"}}'
+          -d '{"changes":{"defaultIndex":"rated-movies"}}'
 
         echo -e "\n--\n+> Opt out of Kibana telemetry"
         curl 'http://localhost:5601/api/telemetry/v2/optIn' \

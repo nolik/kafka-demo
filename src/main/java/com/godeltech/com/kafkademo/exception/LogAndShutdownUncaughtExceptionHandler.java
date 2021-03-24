@@ -1,4 +1,4 @@
-package com.godeltech.com.kafkademo.exceptions;
+package com.godeltech.com.kafkademo.exception;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

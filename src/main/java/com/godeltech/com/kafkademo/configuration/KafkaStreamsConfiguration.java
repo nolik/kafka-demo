@@ -3,8 +3,8 @@ package com.godeltech.com.kafkademo.configuration;
 import static io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG;
 
 import com.godeltech.com.kafkademo.avro.RatedMovie;
-import com.godeltech.com.kafkademo.exceptions.LogAndContinueDeserializationExceptionHandler;
-import com.godeltech.com.kafkademo.exceptions.LogAndContinueProductionExceptionHandler;
+import com.godeltech.com.kafkademo.exception.LogAndContinueDeserializationExceptionHandler;
+import com.godeltech.com.kafkademo.exception.LogAndContinueProductionExceptionHandler;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
 import java.util.HashMap;
 import java.util.Properties;

@@ -1,32 +1,3 @@
-topic:
-  name: users
-  partitions-num: 6
-  replication-factor: 3
-server:
-  port: 9080
-spring:
-  kafka:
-    bootstrap-servers:
-      - 192.168.23.76:9092
-    properties:
-      # CCloud broker connection parameters
-      request.timeout.ms: 20000
-      retry.backoff.ms: 500
-      schema.registry.url: http://192.168.23.76:8081
-    consumer:
-      group-id: group_id
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-    template:
-      default-topic:
-logging:
-  level:
-    root: info
-
 kafka:
   bootstrap-servers: localhost:9092
   application-id: kafka-demo
@@ -42,4 +13,7 @@ kafka:
   producer:
     transaction-quantity: 100
     transaction-amount-limit: 1000
-    available-usernames: Eric, Kenny, Kyle, Stan, Butters, Wendy
+    available-usernames: Eric, Kenny, Kyle, Stan, Butters, Ihar
+  logging:
+    level:
+      root: info

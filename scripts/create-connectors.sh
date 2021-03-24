@@ -1,8 +1,8 @@
 #!/bin/bash
 
 echo "Installing Connector"
-confluent-hub install --no-prompt confluentinc/kafka-connect-datagen:0.4.0
-confluent-hub install --no-prompt debezium/debezium-connector-mysql:1.3.1
+#confluent-hub install --no-prompt confluentinc/kafka-connect-datagen:0.4.0
+#confluent-hub install --no-prompt debezium/debezium-connector-mysql:1.3.1
 confluent-hub install --no-prompt confluentinc/kafka-connect-elasticsearch:10.0.1
 /etc/confluent/docker/run &
 echo "Waiting for Kafka Connect to start listening on $CONNECT_REST_ADVERTISED_HOST_NAME ⏳"
