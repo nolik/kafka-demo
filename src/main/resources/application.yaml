@@ -26,3 +26,20 @@ spring:
 logging:
   level:
     root: info
+
+kafka:
+  bootstrap-servers: localhost:9092
+  application-id: kafka-demo
+  auto-offset-reset-config: earliest
+  acks: 1
+  retries: 3
+  input-topic-name: kafka-test-input
+  output-topic-name: kafka-test-output
+  schema-registry-url: http://localhost:8081
+  movie-input-topic: movies
+  rating-input-topic: ratings
+  output-topic: rated-movies
+  producer:
+    transaction-quantity: 100
+    transaction-amount-limit: 1000
+    available-usernames: Eric, Kenny, Kyle, Stan, Butters, Wendy
