@@ -20,7 +20,7 @@ curl -i -X PUT -H  "Content-Type:application/json" \
             "database.user": "godel",
             "database.password": "dbz",
             "database.server.id": "42",
-            "database.server.name": "mysql",
+            "database.server.name": "godel",
             "table.whitelist": "demo.purchase",
             "database.history.kafka.bootstrap.servers": "broker:29092",
             "database.history.kafka.topic": "dbhistory.demo",

@@ -151,8 +151,8 @@ services:
       - MYSQL_USER=mysqluser
       - MYSQL_PASSWORD=mysqlpw
     volumes:
-      - ${PWD}/scripts/data/mysql:/docker-entrypoint-initdb.d
-      - ${PWD}/scripts/data:/data
+      - ./scripts/data/mysql:/docker-entrypoint-initdb.d
+      - ./scripts/data:/data
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1

@@ -1,5 +1,5 @@
 {
-  "connect.name": "mysql.demo.purchase.Value",
+  "connect.name": "godel.demo.purchase.Value",
   "fields": [
     {
       "name": "id",
@@ -55,6 +55,6 @@
     }
   ],
   "name": "Value",
-  "namespace": "mysql.demo.purchase",
+  "namespace": "godel.demo.purchase",
   "type": "record"
 }

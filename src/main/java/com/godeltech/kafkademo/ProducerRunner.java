@@ -1,9 +1,9 @@
-package com.godeltech.com.kafkademo;
+package com.godeltech.kafkademo;
 
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
-import com.godeltech.com.kafkademo.schema.Customer;
-import com.godeltech.com.kafkademo.service.CustomerProducer;
+import godel.demo.Customer;
+import com.godeltech.kafkademo.service.CustomerProducer;
 import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

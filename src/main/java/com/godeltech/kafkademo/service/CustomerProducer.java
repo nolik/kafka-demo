@@ -1,7 +1,7 @@
-package com.godeltech.com.kafkademo.service;
+package com.godeltech.kafkademo.service;
 
-import com.godeltech.com.kafkademo.configuration.KafkaConfiguration;
-import com.godeltech.com.kafkademo.schema.Customer;
+import com.godeltech.kafkademo.configuration.KafkaConfiguration;
+import godel.demo.Customer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.apachecommons.CommonsLog;
 import lombok.val;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 @CommonsLog(topic = "Producer Logger")
 @RequiredArgsConstructor
 public class CustomerProducer {
+
 	private final KafkaConfiguration kafkaConfiguration;
 	private final KafkaProducer<String, Customer> kafkaProducer;
 
@@ -22,9 +23,9 @@ public class CustomerProducer {
 
 		kafkaProducer.send(record, (metadata, exception) -> {
 			if (exception != null) {
-//				log.warn("Send failed for record {}", exception);
+				log.warn("Send failed for record {}", exception);
 			} else {
-//				log.info(String.format("Send succeeded for record=%s", record));
+				log.info(String.format("Send succeeded for record=%s", record));
 			}
 		});
 	}

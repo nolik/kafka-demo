@@ -7,7 +7,7 @@ kafka:
   schema-registry-url: http://localhost:8081
 
   customer-input-topic: customer
-  purchase-input-topic: mysql.demo.purchase
+  purchase-input-topic: godel.demo.purchase
   detail-output-topic: purchase-detail
 
   logging:

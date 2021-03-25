@@ -1,8 +1,8 @@
-package com.godeltech.com.kafkademo.configuration;
+package com.godeltech.kafkademo.configuration;
 
 import static io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG;
 
-import com.godeltech.com.kafkademo.schema.Customer;
+import godel.demo.Customer;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import java.util.Map;
 import java.util.UUID;

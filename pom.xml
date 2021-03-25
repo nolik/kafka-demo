@@ -8,7 +8,7 @@
 		<version>2.4.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.godeltech.com</groupId>
+	<groupId>com.godeltech</groupId>
 	<artifactId>kafka-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>kafka-demo</name>
@@ -95,7 +95,7 @@
 						</goals>
 						<configuration>
 							<sourceDirectory>${project.basedir}/src/main/resources/avro</sourceDirectory>
-							<outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+							<outputDirectory>${project.basedir}/src/main/java/com/godeltech/kafkademo/schema</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>

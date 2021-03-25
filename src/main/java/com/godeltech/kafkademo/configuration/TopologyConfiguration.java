@@ -1,12 +1,11 @@
-package com.godeltech.com.kafkademo.configuration;
+package com.godeltech.kafkademo.configuration;
 
-import com.godeltech.com.kafkademo.schema.Customer;
-import com.godeltech.com.kafkademo.schema.PurchaseDetail;
-import com.godeltech.com.kafkademo.service.PurchaseDetailJoiner;
+import com.godeltech.kafkademo.service.PurchaseDetailJoiner;
+import godel.demo.Customer;
+import godel.demo.purchase.Value;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import mysql.demo.purchase.Value;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.StreamsBuilder;
@@ -22,7 +21,7 @@ public class TopologyConfiguration {
 
 	@Bean
 	public Topology buildTopology(KafkaConfiguration kafkaConfiguration,
-		SpecificAvroSerde<PurchaseDetail> purchaseDetailSpecificAvroSerde,
+		SpecificAvroSerde<godel.demo.PurchaseDetail> purchaseDetailSpecificAvroSerde,
 		PurchaseDetailJoiner joiner) {
 		val streamsBuilder = new StreamsBuilder();
 
@@ -37,10 +36,12 @@ public class TopologyConfiguration {
 
 		customerStream.to(rekeyedCustomerTopic);
 
-		final KTable<String, Customer> customerTable = streamsBuilder.table(rekeyedCustomerTopic);
+		final KTable<String, godel.demo.Customer> customerTable = streamsBuilder
+			.table(rekeyedCustomerTopic);
 
 		val purchaseKStream = streamsBuilder.<String, Value>stream(purchaseTopic)
-			.map((key, purchase) -> new KeyValue<>(String.valueOf(purchase.getCustomerId()), purchase));
+			.map((key, purchase) -> new KeyValue<>(String.valueOf(purchase.getCustomerId()),
+				purchase));
 
 		val purchaseDetailKStream = purchaseKStream.join(customerTable, joiner);
 

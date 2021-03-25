@@ -1,10 +1,10 @@
-package com.godeltech.com.kafkademo.configuration;
+package com.godeltech.kafkademo.configuration;
 
 import static io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG;
 
-import com.godeltech.com.kafkademo.exception.LogAndContinueDeserializationExceptionHandler;
-import com.godeltech.com.kafkademo.exception.LogAndContinueProductionExceptionHandler;
-import com.godeltech.com.kafkademo.schema.PurchaseDetail;
+import com.godeltech.kafkademo.exception.LogAndContinueDeserializationExceptionHandler;
+import com.godeltech.kafkademo.exception.LogAndContinueProductionExceptionHandler;
+import godel.demo.PurchaseDetail;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
 import java.util.HashMap;
 import java.util.Properties;

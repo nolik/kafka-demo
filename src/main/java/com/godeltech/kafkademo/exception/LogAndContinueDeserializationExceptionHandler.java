@@ -1,4 +1,4 @@
-package com.godeltech.com.kafkademo.exception;
+package com.godeltech.kafkademo.exception;
 
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;

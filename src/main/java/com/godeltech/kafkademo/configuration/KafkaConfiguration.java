@@ -1,4 +1,4 @@
-package com.godeltech.com.kafkademo.configuration;
+package com.godeltech.kafkademo.configuration;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

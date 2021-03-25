@@ -1,4 +1,4 @@
-package com.godeltech.com.kafkademo;
+package com.godeltech.kafkademo;
 
 import org.springframework.boot.test.context.SpringBootTest;
 

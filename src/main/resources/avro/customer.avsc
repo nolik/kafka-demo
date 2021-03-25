@@ -1,5 +1,5 @@
 {
-  "namespace": "com.godeltech.com.kafkademo.schema",
+  "namespace": "godel.demo",
   "type": "record",
   "name": "Customer",
   "fields": [
