@@ -3,10 +3,6 @@
 echo Waiting for Kafka to be ready...
 cub kafka-ready -b broker:29092 1 20
 sleep 0
-kafka-topics --create --topic movies --if-not-exists --bootstrap-server broker:29092 --partitions 1 --replication-factor 1
-kafka-topics --create --topic rekeyed-movies --if-not-exists --bootstrap-server broker:29092 --partitions 1 --replication-factor 1
-kafka-topics --create --topic ratings --if-not-exists --bootstrap-server broker:29092 --partitions 1 --replication-factor 1
-kafka-topics --create --topic rated-movies --if-not-exists --bootstrap-server broker:29092 --partitions 1 --replication-factor 1
 
 kafka-topics --create --topic customer --if-not-exists --bootstrap-server broker:29092 --partitions 1 --replication-factor 1
 kafka-topics --create --topic purchase-detail --if-not-exists --bootstrap-server broker:29092 --partitions 1 --replication-factor 1

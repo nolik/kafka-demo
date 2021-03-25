@@ -22,9 +22,9 @@ public class CustomerProducer {
 
 		kafkaProducer.send(record, (metadata, exception) -> {
 			if (exception != null) {
-				log.warn("Send failed for record {}", exception);
+//				log.warn("Send failed for record {}", exception);
 			} else {
-				log.info(String.format("Send succeeded for record=%s", record));
+//				log.info(String.format("Send succeeded for record=%s", record));
 			}
 		});
 	}

@@ -39,10 +39,10 @@ public class TopologyConfiguration {
 
 		final KTable<String, Customer> customerTable = streamsBuilder.table(rekeyedCustomerTopic);
 
-		val purchaseStream = streamsBuilder.<String, Value>stream(purchaseTopic)
+		val purchaseKStream = streamsBuilder.<String, Value>stream(purchaseTopic)
 			.map((key, purchase) -> new KeyValue<>(String.valueOf(purchase.getId()), purchase));
 
-		val purchaseDetailKStream = purchaseStream.join(customerTable, joiner);
+		val purchaseDetailKStream = purchaseKStream.join(customerTable, joiner);
 
 		purchaseDetailKStream
 			.to(ratedMoviesTopic, Produced.with(Serdes.String(), purchaseDetailSpecificAvroSerde));
