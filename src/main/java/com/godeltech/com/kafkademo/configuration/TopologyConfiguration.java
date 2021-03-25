@@ -1,12 +1,12 @@
 package com.godeltech.com.kafkademo.configuration;
 
-import com.godeltech.com.kafkademo.avro.Movie;
-import com.godeltech.com.kafkademo.avro.RatedMovie;
-import com.godeltech.com.kafkademo.avro.Rating;
-import com.godeltech.com.kafkademo.service.MovieRatingJoiner;
+import com.godeltech.com.kafkademo.schema.Customer;
+import com.godeltech.com.kafkademo.schema.PurchaseDetail;
+import com.godeltech.com.kafkademo.service.PurchaseDetailJoiner;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import mysql.demo.purchase.Value;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.StreamsBuilder;
@@ -22,26 +22,30 @@ public class TopologyConfiguration {
 
 	@Bean
 	public Topology buildTopology(KafkaConfiguration kafkaConfiguration,
-		SpecificAvroSerde<RatedMovie> ratedMovieAvroSerde, MovieRatingJoiner joiner) {
+		SpecificAvroSerde<PurchaseDetail> purchaseDetailSpecificAvroSerde,
+		PurchaseDetailJoiner joiner) {
 		val streamsBuilder = new StreamsBuilder();
-		val movieTopic = kafkaConfiguration.getMovieInputTopic();
-		val rekeyedMovieTopic = "rekeyed-movies";
-		val ratingTopic = kafkaConfiguration.getRatingInputTopic();
-		val ratedMoviesTopic = kafkaConfiguration.getOutputTopic();
 
-		val movieStream = streamsBuilder.<String, Movie>stream(movieTopic)
-			.map((key, movie) -> new KeyValue<>(String.valueOf(movie.getId()), movie));
+		val customerTopic = kafkaConfiguration.getCustomerInputTopic();
+		val rekeyedCustomerTopic = "rekeyed-customers";
+		val purchaseTopic = kafkaConfiguration.getPurchaseInputTopic();
+		val ratedMoviesTopic = kafkaConfiguration.getDetailOutputTopic();
 
-		movieStream.to(rekeyedMovieTopic);
+		val customerStream = streamsBuilder.<String, Customer>stream(customerTopic)
+			.map((key, customer) -> new KeyValue<>(String.valueOf(customer.getCustomerId()),
+				customer));
 
-		final KTable<String, Movie> movies = streamsBuilder.table(rekeyedMovieTopic);
+		customerStream.to(rekeyedCustomerTopic);
 
-		val ratings = streamsBuilder.<String, Rating>stream(ratingTopic)
-			.map((key, rating) -> new KeyValue<>(String.valueOf(rating.getId()), rating));
+		final KTable<String, Customer> customerTable = streamsBuilder.table(rekeyedCustomerTopic);
 
-		val ratedMovie = ratings.join(movies, joiner);
+		val purchaseStream = streamsBuilder.<String, Value>stream(purchaseTopic)
+			.map((key, purchase) -> new KeyValue<>(String.valueOf(purchase.getId()), purchase));
 
-		ratedMovie.to(ratedMoviesTopic, Produced.with(Serdes.String(), ratedMovieAvroSerde));
+		val purchaseDetailKStream = purchaseStream.join(customerTable, joiner);
+
+		purchaseDetailKStream
+			.to(ratedMoviesTopic, Produced.with(Serdes.String(), purchaseDetailSpecificAvroSerde));
 
 		val topology = streamsBuilder.build();
 

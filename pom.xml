@@ -19,6 +19,7 @@
 		<avro.serializer.version>4.0.0</avro.serializer.version>
 		<avro.serde.version>5.4.0</avro.serde.version>
 		<avro.plugin.version>1.8.2</avro.plugin.version>
+		<java.fucker.version>1.0.2</java.fucker.version>
 	</properties>
 
 	<repositories>
@@ -59,8 +60,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
+			<groupId>com.github.javafaker</groupId>
+			<artifactId>javafaker</artifactId>
+			<version>${java.fucker.version}</version>
 		</dependency>
 	</dependencies>
 

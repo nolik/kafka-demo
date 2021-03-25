@@ -1,7 +1,7 @@
 package com.godeltech.com.kafkademo.service;
 
-import com.godeltech.com.kafkademo.avro.Rating;
 import com.godeltech.com.kafkademo.configuration.KafkaConfiguration;
+import com.godeltech.com.kafkademo.schema.Customer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.apachecommons.CommonsLog;
 import lombok.val;
@@ -12,14 +12,13 @@ import org.springframework.stereotype.Service;
 @Service
 @CommonsLog(topic = "Producer Logger")
 @RequiredArgsConstructor
-public class RatingProducer {
-
+public class CustomerProducer {
 	private final KafkaConfiguration kafkaConfiguration;
-	private final KafkaProducer<String, Rating> kafkaProducer;
+	private final KafkaProducer<String, Customer> kafkaProducer;
 
-	public void sendMessage(Rating movie) {
-		val record = new ProducerRecord<>(kafkaConfiguration.getRatingInputTopic(),
-			String.valueOf(movie.getId()), movie);
+	public void sendMessage(Customer customer) {
+		val record = new ProducerRecord<>(kafkaConfiguration.getCustomerInputTopic(),
+			String.valueOf(customer.getCustomerId()), customer);
 
 		kafkaProducer.send(record, (metadata, exception) -> {
 			if (exception != null) {

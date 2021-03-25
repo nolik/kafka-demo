@@ -1,0 +1,38 @@
+{
+  "namespace": "com.godeltech.com.kafkademo.schema",
+  "type": "record",
+  "name": "PurchaseDetail",
+  "fields": [
+    {"name": "id", "type": "long"},
+    {"name": "first_name", "type": "string"},
+    {"name": "second_name", "type": "string"},
+     {
+          "default": null,
+          "name": "product",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        {
+          "default": null,
+          "name": "price",
+          "type": [
+            "null",
+            "double"
+          ]
+        },
+        {
+          "default": null,
+          "name": "occurred_at",
+          "type": [
+            "null",
+            {
+              "connect.name": "io.debezium.time.ZonedTimestamp",
+              "connect.version": 1,
+              "type": "string"
+            }
+          ]
+        }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "connect.name": "mysql.demo.purchase.Value",
+  "fields": [
+    {
+      "name": "id",
+      "type": "int"
+    },
+    {
+      "default": null,
+      "name": "customer_id",
+      "type": [
+        "null",
+        "int"
+      ]
+    },
+    {
+      "default": null,
+      "name": "product",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "default": null,
+      "name": "price",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "default": null,
+      "name": "CREATE_TS",
+      "type": [
+        "null",
+        {
+          "connect.name": "io.debezium.time.ZonedTimestamp",
+          "connect.version": 1,
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "default": null,
+      "name": "UPDATE_TS",
+      "type": [
+        "null",
+        {
+          "connect.name": "io.debezium.time.ZonedTimestamp",
+          "connect.version": 1,
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "name": "Value",
+  "namespace": "mysql.demo.purchase",
+  "type": "record"
+}

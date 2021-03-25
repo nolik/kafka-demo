@@ -8,6 +8,10 @@ kafka-topics --create --topic rekeyed-movies --if-not-exists --bootstrap-server 
 kafka-topics --create --topic ratings --if-not-exists --bootstrap-server broker:29092 --partitions 1 --replication-factor 1
 kafka-topics --create --topic rated-movies --if-not-exists --bootstrap-server broker:29092 --partitions 1 --replication-factor 1
 
+kafka-topics --create --topic customer --if-not-exists --bootstrap-server broker:29092 --partitions 1 --replication-factor 1
+kafka-topics --create --topic purchase-detail --if-not-exists --bootstrap-server broker:29092 --partitions 1 --replication-factor 1
+kafka-topics --create --topic rekeyed-customers --if-not-exists --bootstrap-server broker:29092 --partitions 1 --replication-factor 1
+
 kafka-topics --create --topic _kafka-connect-01-configs --if-not-exists --bootstrap-server broker:29092 --partitions 1 --replication-factor 1 --config cleanup.policy=compact
 kafka-topics --create --topic _kafka-connect-01-offsets --if-not-exists --bootstrap-server broker:29092 --partitions 1 --replication-factor 1 --config cleanup.policy=compact
 kafka-topics --create --topic _kafka-connect-01-status --if-not-exists --bootstrap-server broker:29092 --partitions 1 --replication-factor 1 --config cleanup.policy=compact

@@ -17,7 +17,7 @@ public class KafkaConfiguration {
 	private final String autoOffsetResetConfig;
 	private final String schemaRegistryUrl;
 
-	private final String movieInputTopic;
-	private final String ratingInputTopic;
-	private final String outputTopic;
+	private final String customerInputTopic;
+	private final String purchaseInputTopic;
+	private final String detailOutputTopic;
 }
