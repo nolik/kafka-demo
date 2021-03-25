@@ -1,7 +1,6 @@
 package com.godeltech.kafkademo.configuration;
 
 import com.godeltech.kafkademo.service.PurchaseDetailJoiner;
-import godel.demo.Customer;
 import godel.demo.purchase.Value;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
 import lombok.extern.slf4j.Slf4j;
@@ -26,18 +25,11 @@ public class TopologyConfiguration {
 		val streamsBuilder = new StreamsBuilder();
 
 		val customerTopic = kafkaConfiguration.getCustomerInputTopic();
-		val rekeyedCustomerTopic = "rekeyed-customers";
 		val purchaseTopic = kafkaConfiguration.getPurchaseInputTopic();
 		val ratedMoviesTopic = kafkaConfiguration.getDetailOutputTopic();
-
-		val customerStream = streamsBuilder.<String, Customer>stream(customerTopic)
-			.map((key, customer) -> new KeyValue<>(String.valueOf(customer.getCustomerId()),
-				customer));
-
-		customerStream.to(rekeyedCustomerTopic);
-
+		
 		final KTable<String, godel.demo.Customer> customerTable = streamsBuilder
-			.table(rekeyedCustomerTopic);
+			.table(customerTopic);
 
 		val purchaseKStream = streamsBuilder.<String, Value>stream(purchaseTopic)
 			.map((key, purchase) -> new KeyValue<>(String.valueOf(purchase.getCustomerId()),
