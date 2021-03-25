@@ -1,5 +1,6 @@
 Application with demo of Apache Kafka infrastructure with Apache-Kafka + Schema Registry (Avro) + with Source Connector (MySQL) and Sink Connector (Elasticsearch) + KStream App that join change-stream from MySql and Produced stream and demo of KSQL querying. 
 
+![HLD](./hld.svg)
 
 ### Run the App:
 docker-compose up -d
