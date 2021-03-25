@@ -40,7 +40,7 @@ public class TopologyConfiguration {
 		final KTable<String, Customer> customerTable = streamsBuilder.table(rekeyedCustomerTopic);
 
 		val purchaseKStream = streamsBuilder.<String, Value>stream(purchaseTopic)
-			.map((key, purchase) -> new KeyValue<>(String.valueOf(purchase.getId()), purchase));
+			.map((key, purchase) -> new KeyValue<>(String.valueOf(purchase.getCustomerId()), purchase));
 
 		val purchaseDetailKStream = purchaseKStream.join(customerTable, joiner);
 

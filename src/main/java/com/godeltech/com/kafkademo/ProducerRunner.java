@@ -29,7 +29,6 @@ public class ProducerRunner implements ApplicationRunner {
 	@SneakyThrows
 	private void pushTransactionToKafka(Customer customer) {
 		customerProducer.sendMessage(customer);
-//		Thread.sleep(300l);
 	}
 
 	private Customer newCustomer(int i) {
