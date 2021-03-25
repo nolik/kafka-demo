@@ -8,7 +8,7 @@
 		<version>2.4.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.godeltech.com</groupId>
+	<groupId>com.godeltech</groupId>
 	<artifactId>kafka-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>kafka-demo</name>
@@ -19,6 +19,7 @@
 		<avro.serializer.version>4.0.0</avro.serializer.version>
 		<avro.serde.version>5.4.0</avro.serde.version>
 		<avro.plugin.version>1.8.2</avro.plugin.version>
+		<java.fucker.version>1.0.2</java.fucker.version>
 	</properties>
 
 	<repositories>
@@ -59,8 +60,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
+			<groupId>com.github.javafaker</groupId>
+			<artifactId>javafaker</artifactId>
+			<version>${java.fucker.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -93,7 +95,7 @@
 						</goals>
 						<configuration>
 							<sourceDirectory>${project.basedir}/src/main/resources/avro</sourceDirectory>
-							<outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+							<outputDirectory>${project.basedir}/src/main/java/com/godeltech/kafkademo/schema</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>

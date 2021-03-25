@@ -1,0 +1,10 @@
+{
+  "namespace": "godel.demo",
+  "type": "record",
+  "name": "Customer",
+  "fields": [
+    {"name": "customer_id", "type": "long"},
+    {"name": "first_name", "type": "string"},
+    {"name": "second_name", "type": "string"}
+  ]
+}

@@ -1,4 +1,4 @@
-package com.godeltech.com.kafkademo.configuration;
+package com.godeltech.kafkademo.configuration;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ public class KafkaConfiguration {
 	private final String autoOffsetResetConfig;
 	private final String schemaRegistryUrl;
 
-	private final String movieInputTopic;
-	private final String ratingInputTopic;
-	private final String outputTopic;
+	private final String customerInputTopic;
+	private final String purchaseInputTopic;
+	private final String detailOutputTopic;
 }

@@ -1,13 +1,14 @@
-package com.godeltech.com.kafkademo.configuration;
+package com.godeltech.kafkademo.configuration;
 
 import static io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG;
 
-import com.godeltech.com.kafkademo.avro.RatedMovie;
-import com.godeltech.com.kafkademo.exception.LogAndContinueDeserializationExceptionHandler;
-import com.godeltech.com.kafkademo.exception.LogAndContinueProductionExceptionHandler;
+import com.godeltech.kafkademo.exception.LogAndContinueDeserializationExceptionHandler;
+import com.godeltech.kafkademo.exception.LogAndContinueProductionExceptionHandler;
+import godel.demo.PurchaseDetail;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
 import java.util.HashMap;
 import java.util.Properties;
+import lombok.val;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
@@ -46,10 +47,11 @@ public class KafkaStreamsConfiguration {
 		return properties;
 	}
 
+
 	@Bean
-	public SpecificAvroSerde<RatedMovie> ratedMovieAvroSerde(
+	public SpecificAvroSerde<PurchaseDetail> purchaseDetailSpecificAvroSerde(
 		KafkaConfiguration kafkaConfiguration) {
-		SpecificAvroSerde<RatedMovie> movieAvroSerde = new SpecificAvroSerde<>();
+		val movieAvroSerde = new SpecificAvroSerde<PurchaseDetail>();
 
 		final HashMap<String, String> serdeConfig = new HashMap<>();
 		serdeConfig.put(SCHEMA_REGISTRY_URL_CONFIG, kafkaConfiguration.getSchemaRegistryUrl());

@@ -1,4 +1,4 @@
-package com.godeltech.com.kafkademo;
+package com.godeltech.kafkademo;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.time.Duration;

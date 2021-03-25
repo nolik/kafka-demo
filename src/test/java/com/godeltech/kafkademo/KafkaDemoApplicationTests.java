@@ -1,13 +1,8 @@
-package com.godeltech.com.kafkademo;
+package com.godeltech.kafkademo;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class KafkaDemoApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
 
 }
