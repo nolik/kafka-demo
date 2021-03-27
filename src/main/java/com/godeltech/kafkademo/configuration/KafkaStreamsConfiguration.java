@@ -29,7 +29,7 @@ public class KafkaStreamsConfiguration {
 
 	@Bean("streams-configuration")
 	public Properties getKafkaStreamsConfiguration(KafkaConfiguration kafkaConfiguration) {
-		final var properties = new Properties();
+		val properties = new Properties();
 		properties
 			.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaConfiguration.getBootstrapServers());
 		properties.put(StreamsConfig.APPLICATION_ID_CONFIG, kafkaConfiguration.getApplicationId());

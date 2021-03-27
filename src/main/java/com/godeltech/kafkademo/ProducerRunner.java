@@ -1,12 +1,11 @@
 package com.godeltech.kafkademo;
 
 import com.github.javafaker.Faker;
-import com.github.javafaker.Name;
-import godel.demo.Customer;
 import com.godeltech.kafkademo.service.CustomerProducer;
+import godel.demo.Customer;
 import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
+import lombok.val;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -22,22 +21,21 @@ public class ProducerRunner implements ApplicationRunner {
 
 		Stream.iterate(1, i -> i + 1)
 			.limit(300)
-			.map(this::newCustomer)
-			.forEach(this::pushTransactionToKafka);
+			.map(this::createNewCustomer)
+			.forEach(this::produceNewCustomer);
 	}
 
-	@SneakyThrows
-	private void pushTransactionToKafka(Customer customer) {
-		customerProducer.sendMessage(customer);
-	}
-
-	private Customer newCustomer(int i) {
-		Name fakeName = new Faker().name();
+	private Customer createNewCustomer(int customerId) {
+		val fakeName = new Faker().name();
 
 		return Customer.newBuilder()
-			.setCustomerId(i)
+			.setCustomerId(customerId)
 			.setFirstName(fakeName.firstName())
 			.setSecondName(fakeName.lastName())
 			.build();
+	}
+
+	private void produceNewCustomer(Customer customer) {
+		customerProducer.sendMessage(customer);
 	}
 }

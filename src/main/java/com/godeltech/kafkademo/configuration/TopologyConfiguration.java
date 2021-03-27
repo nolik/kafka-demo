@@ -23,26 +23,29 @@ public class TopologyConfiguration {
 		SpecificAvroSerde<godel.demo.PurchaseDetail> purchaseDetailSpecificAvroSerde,
 		PurchaseDetailJoiner joiner) {
 		val streamsBuilder = new StreamsBuilder();
-
 		val customerTopic = kafkaConfiguration.getCustomerInputTopic();
 		val purchaseTopic = kafkaConfiguration.getPurchaseInputTopic();
-		val ratedMoviesTopic = kafkaConfiguration.getDetailOutputTopic();
-		
+		val purchaseDetailTopic = kafkaConfiguration.getDetailOutputTopic();
+
+		// Create table of Customers
 		final KTable<String, godel.demo.Customer> customerTable = streamsBuilder
 			.table(customerTopic);
 
+		// Create stream of purchases
 		val purchaseKStream = streamsBuilder.<String, Value>stream(purchaseTopic)
 			.map((key, purchase) -> new KeyValue<>(String.valueOf(purchase.getCustomerId()),
 				purchase));
-
+		
+		// Join stream of purchases with customer information from KTable
 		val purchaseDetailKStream = purchaseKStream.join(customerTable, joiner);
 
+		// Produce resulted stream to output topic
 		purchaseDetailKStream
-			.to(ratedMoviesTopic, Produced.with(Serdes.String(), purchaseDetailSpecificAvroSerde));
+			.to(purchaseDetailTopic, Produced.with(Serdes.String(), purchaseDetailSpecificAvroSerde));
 
 		val topology = streamsBuilder.build();
 
-		// 6. Print topology.
+		// Print topology.
 		log.info(topology.describe().toString());
 
 		return topology;

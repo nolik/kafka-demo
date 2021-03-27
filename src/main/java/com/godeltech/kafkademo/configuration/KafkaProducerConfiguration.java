@@ -19,7 +19,7 @@ public class KafkaProducerConfiguration {
 
 	@Bean
 	public KafkaProducer<String, Customer> getCustomerKafkaProducer(
-		final KafkaConfiguration kafkaConfiguration) {
+		KafkaConfiguration kafkaConfiguration) {
 
 		return new KafkaProducer<>(Map.of(
 			ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaConfiguration.getBootstrapServers(),
